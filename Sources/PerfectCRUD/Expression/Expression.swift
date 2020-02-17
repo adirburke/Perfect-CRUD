@@ -58,6 +58,57 @@ public indirect enum CRUDExpression {
 	case url(URL)
 	case null
 	
+    public var description : String {
+        switch self {
+            
+        case .column(_), .and(_),.or(_),.equality(_),.inequality(_), .not(_),.lessThan(_),.lessThanEqual(_),.greaterThan(_),.greaterThanEqual(_),.in(_),.like(_),.lazy(_), .keyPath(_):
+            return ""
+        case .integer(let item):
+             return String(item)
+        case .uinteger(let item):
+        return String(item)
+            
+        case .integer64(let item):
+        return String(item)
+        case .uinteger64(let item):
+        return String(item)
+        case .integer32(let item):
+        return String(item)
+        case .uinteger32(let item):
+        return String(item)
+        case .integer16(let item):
+        return String(item)
+        case .uinteger16(let item):
+        return String(item)
+        case .integer8(let item):
+        return String(item)
+        case .uinteger8(let item):
+        return String(item)
+        case .decimal(let item):
+        return String(item)
+        case .float(let item):
+        return String(item)
+        case .string(let item):
+        return String(item)
+        case .blob(_):
+            return ""
+        case .sblob(_):
+            return ""
+        case .bool(let item):
+        return String(item)
+        case .uuid(let item):
+            return item.uuidString
+        case .date(let item):
+            return String(item.iso8601())
+        case .url(let item):
+            return item.absoluteString
+        case .null:
+            return "NULL"
+        @unknown default:
+            return ""
+        }
+    }
+    
 	// todo:
 	// .blob with Data
 	// .integer of varying width
