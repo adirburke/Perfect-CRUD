@@ -60,7 +60,7 @@ public struct Insert<OAF: Codable, A: TableProtocol>: FromTableProtocol, Command
 		} else {
 			sqlStr = "INSERT INTO \(nameQ) (\(columnNames.joined(separator: ", "))) VALUES (\(bindIdentifiers.joined(separator: ", ")))"
 		}
-		CRUDLogging.log(.query, sqlStr)
+        CRUDLogging.log(.query, sqlStr, delegate.bindings)
 		sqlGenState = state
 		let exeDelegate = try databaseConfiguration.sqlExeDelegate(forSQL: sqlStr)
 		try exeDelegate.bind(delegate.bindings)

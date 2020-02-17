@@ -84,8 +84,9 @@ public struct Join<OAF: Codable, A: TableProtocol, B: Codable, O: Equatable>: Ta
 				}
 			}
 			state.statements.append(.init(sql: sqlStr, bindings: delegate.bindings))
+            CRUDLogging.log(.query, sqlStr, delegate.bindings)
 			state.delegate.bindings = []
-			CRUDLogging.log(.query, sqlStr)
+			
 		// ordering
 		case .insert, .update, .delete:()
 		//			state.fromStr.append("\(myTable)")
@@ -193,8 +194,9 @@ public struct JoinPivot<OAF: Codable, MasterTable: TableProtocol, MyForm: Codabl
 				}
 			}
 			state.statements.append(.init(sql: sqlStr, bindings: delegate.bindings))
+            CRUDLogging.log(.query, sqlStr, delegate.bindings)
 			state.delegate.bindings = []
-			CRUDLogging.log(.query, sqlStr)
+//			CRUDLogging.log(.query, sqlStr)
 		// ordering
 		case .insert, .update, .delete:()
 		//			state.fromStr.append("\(myTable)")

@@ -71,8 +71,9 @@ public struct Table<A: Codable, C: DatabaseProtocol>: TableProtocol, Joinable, S
 				sqlStr += limitStr
 			}
 			state.statements.append(.init(sql: sqlStr, bindings: delegate.bindings))
+            CRUDLogging.log(.query, sqlStr, delegate.bindings)
 			state.delegate.bindings = []
-			CRUDLogging.log(.query, sqlStr)
+//			CRUDLogging.log(.query, sqlStr)
 		case .update:
 			guard let encoder = state.bindingsEncoder else {
 				throw CRUDSQLGenError("No bindings encoder for update.")
@@ -87,16 +88,18 @@ public struct Table<A: Codable, C: DatabaseProtocol>: TableProtocol, Joinable, S
 				sqlStr += "\nWHERE \(try whereExpr.sqlSnippet(state: state))"
 			}
 			state.statements.append(.init(sql: sqlStr, bindings: delegate.bindings))
+            CRUDLogging.log(.query, sqlStr, delegate.bindings)
 			state.delegate.bindings = []
-			CRUDLogging.log(.query, sqlStr)
+//			CRUDLogging.log(.query, sqlStr)
 		case .delete:
 			var sqlStr = "DELETE FROM \(nameQ)"
 			if let whereExpr = state.whereExpr {
 				sqlStr += "\nWHERE \(try whereExpr.sqlSnippet(state: state))"
 			}
 			state.statements.append(.init(sql: sqlStr, bindings: delegate.bindings))
+            CRUDLogging.log(.query, sqlStr, delegate.bindings)
 			state.delegate.bindings = []
-			CRUDLogging.log(.query, sqlStr)
+//			CRUDLogging.log(.query, sqlStr)
 		case .insert:()
 		//			state.fromStr.append("\(myTable)")
 		case .unknown:

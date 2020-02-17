@@ -20,13 +20,13 @@ public struct Database<C: DatabaseConfigurationProtocol>: DatabaseProtocol {
 
 public extension Database {
 	func sql(_ sql: String, bindings: Bindings = []) throws {
-		CRUDLogging.log(.query, sql)
+		CRUDLogging.log(.query, sql, bindings)
 		let delegate = try configuration.sqlExeDelegate(forSQL: sql)
 		try delegate.bind(bindings, skip: 0)
 		_ = try delegate.hasNext()
 	}
 	func sql<A: Codable>(_ sql: String, bindings: Bindings = [], _ type: A.Type) throws -> [A] {
-		CRUDLogging.log(.query, sql)
+		CRUDLogging.log(.query, sql, bindings)
 		let delegate = try configuration.sqlExeDelegate(forSQL: sql)
 		try delegate.bind(bindings, skip: 0)
 		var ret: [A] = []

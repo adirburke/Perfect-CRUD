@@ -230,7 +230,7 @@ public struct Create<OAF: Codable, D: DatabaseProtocol> {
 		let delegate = fromDatabase.configuration.sqlGenDelegate
 		let sql = try delegate.getCreateTableSQL(forTable: tableStructure, policy: policy)
 		for stat in sql {
-			CRUDLogging.log(.query, stat)
+            CRUDLogging.log(.query, stat)
 			let exeDelegate = try fromDatabase.configuration.sqlExeDelegate(forSQL: stat)
 			_ = try exeDelegate.hasNext()
 		}
