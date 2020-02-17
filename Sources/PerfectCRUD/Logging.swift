@@ -170,9 +170,13 @@ public extension CRUDLogging {
 public extension CRUDLogging{
     static func log(_ type : CRUDLogEventType, _ msg : String, _ bindings : Bindings) {
         let now = Date()
+        var msg = msg
         do {
-            let something = bindings.map { "\($0.0)=\($0.1.description) "}
-            print("\(msg) \nParms: \(something)")
+            if bindings.count > 0 {
+                let something = bindings.map { "\($0.0) = \'\($0.1.description)\' "}
+                //            print("\(msg) \nParms: \(something)")
+                msg = msg + something.reduce("Parms", {"\($0) - \($1)"})
+            }
         #if DEBUG || Xcode
             loggingQueue.sync {
                 pendingEvents.append(.init(time: now, type: type, msg: msg))
