@@ -409,8 +409,8 @@ public extension Date {
 		let dateFormatter = DateFormatter()
 		dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 		dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
-		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-		let ret = dateFormatter.string(from: self) + "Z"
+		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+		let ret = dateFormatter.string(from: self)
 		return ret
 	}
 	
