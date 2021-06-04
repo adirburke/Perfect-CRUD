@@ -61,8 +61,8 @@ public indirect enum CRUDExpression {
     public var description : String {
         switch self {
             
-        case .column(_), .and(_),.or(_),.equality(_),.inequality(_), .not(_),.lessThan(_),.lessThanEqual(_),.greaterThan(_),.greaterThanEqual(_),.in(_),.like(_),.lazy(_), .keyPath(_):
-            return ""
+//        case .column(_), .and(_),.or(_),.equality(_),.inequality(_), .not(_),.lessThan(_),.lessThanEqual(_),.greaterThan(_),.greaterThanEqual(_),.in(_),.like(_),.lazy(_), .keyPath(_):
+//            return ""
         case .integer(let item):
              return String(item)
         case .uinteger(let item):
@@ -104,8 +104,10 @@ public indirect enum CRUDExpression {
             return item.absoluteString
         case .null:
             return "NULL"
-        @unknown default:
+        default:
             return ""
+//        @unknown default:
+//            return ""
         }
     }
     
